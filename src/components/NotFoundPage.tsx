@@ -1,0 +1,1 @@
+export function NotFoundPage() { return <main className="mx-auto min-h-screen max-w-3xl px-4 py-16 text-slate-300"><h1 className="text-2xl font-semibold text-white">页面不存在</h1><p className="mt-3">链接可能已失效，或页面地址有误。</p><a className="mt-6 inline-block text-cyan-200" href="/">返回首页并清除异常状态</a></main>; }

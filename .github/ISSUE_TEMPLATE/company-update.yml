@@ -1,0 +1,9 @@
+name: 公司信息更正
+description: 提交已知公司资料的更正
+body:
+  - type: input
+    attributes: { label: 公司名称 }
+  - type: textarea
+    attributes: { label: 需要更正的信息 }
+  - type: textarea
+    attributes: { label: 公开参考来源 }

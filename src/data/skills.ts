@@ -1,0 +1,81 @@
+import type { SkillDefinition, SkillGroup } from "../types";
+
+export const skillGroupLabels: Record<SkillGroup, string> = {
+  "software-engineering": "软件与工程基础",
+  "robotics-algorithm": "机器人与算法",
+  "product-project": "产品与项目",
+  "technical-service": "技术服务与交付",
+  "testing-quality": "测试与质量",
+  "manufacturing-supply": "制造与供应链",
+  "sales-market-operations": "销售、市场与运营",
+};
+
+export const skillDefinitions: SkillDefinition[] = [
+  { name: "Python", group: "software-engineering", priority: "primary" },
+  { name: "C++", group: "software-engineering", priority: "primary" },
+  { name: "Linux", group: "software-engineering", priority: "primary" },
+  { name: "ROS2", group: "software-engineering", priority: "primary" },
+  { name: "嵌入式", group: "software-engineering", priority: "secondary" },
+  { name: "数据处理", group: "software-engineering", priority: "secondary" },
+
+  { name: "Gazebo", group: "robotics-algorithm", priority: "secondary" },
+  { name: "MuJoCo", group: "robotics-algorithm", priority: "secondary" },
+  { name: "Isaac Sim", group: "robotics-algorithm", priority: "secondary" },
+  { name: "PyTorch", group: "robotics-algorithm", priority: "primary" },
+  { name: "OpenCV", group: "robotics-algorithm", priority: "primary" },
+  { name: "YOLO", group: "robotics-algorithm", priority: "specialized" },
+  { name: "点云/PCL", group: "robotics-algorithm", priority: "specialized" },
+  { name: "SLAM", group: "robotics-algorithm", priority: "primary" },
+  { name: "PID", group: "robotics-algorithm", priority: "secondary" },
+  { name: "LQR", group: "robotics-algorithm", priority: "specialized" },
+  { name: "MPC", group: "robotics-algorithm", priority: "specialized" },
+  { name: "强化学习", group: "robotics-algorithm", priority: "secondary" },
+  { name: "模仿学习", group: "robotics-algorithm", priority: "specialized" },
+  { name: "VLA", group: "robotics-algorithm", priority: "specialized" },
+  { name: "多模态大模型", group: "robotics-algorithm", priority: "specialized" },
+  { name: "机械臂", group: "robotics-algorithm", priority: "secondary" },
+  { name: "移动机器人", group: "robotics-algorithm", priority: "secondary" },
+
+  { name: "需求分析", group: "product-project", priority: "primary" },
+  { name: "产品定义", group: "product-project", priority: "primary" },
+  { name: "PRD", group: "product-project", priority: "secondary" },
+  { name: "竞品分析", group: "product-project", priority: "secondary" },
+  { name: "方案设计", group: "product-project", priority: "primary" },
+  { name: "项目管理", group: "product-project", priority: "primary" },
+
+  { name: "传感器调试", group: "technical-service", priority: "secondary" },
+  { name: "技术文档", group: "technical-service", priority: "primary" },
+  { name: "客户沟通", group: "technical-service", priority: "primary" },
+  { name: "现场调试", group: "technical-service", priority: "primary" },
+  { name: "故障排查", group: "technical-service", priority: "primary" },
+  { name: "电气基础", group: "technical-service", priority: "secondary" },
+  { name: "系统集成", group: "technical-service", priority: "primary" },
+  { name: "项目交付", group: "technical-service", priority: "primary" },
+  { name: "客户培训", group: "technical-service", priority: "secondary" },
+
+  { name: "机器人测试", group: "testing-quality", priority: "primary" },
+  { name: "测试设计", group: "testing-quality", priority: "primary" },
+  { name: "缺陷管理", group: "testing-quality", priority: "primary" },
+  { name: "自动化测试", group: "testing-quality", priority: "secondary" },
+  { name: "质量管理", group: "testing-quality", priority: "primary" },
+  { name: "FMEA", group: "testing-quality", priority: "specialized" },
+  { name: "8D", group: "testing-quality", priority: "specialized" },
+  { name: "供应商质量", group: "testing-quality", priority: "specialized" },
+
+  { name: "BOM", group: "manufacturing-supply", priority: "secondary" },
+  { name: "工艺设计", group: "manufacturing-supply", priority: "primary" },
+  { name: "NPI", group: "manufacturing-supply", priority: "primary" },
+  { name: "供应链管理", group: "manufacturing-supply", priority: "primary" },
+  { name: "采购管理", group: "manufacturing-supply", priority: "primary" },
+  { name: "供应商开发", group: "manufacturing-supply", priority: "secondary" },
+
+  { name: "行业研究", group: "sales-market-operations", priority: "primary" },
+  { name: "技术营销", group: "sales-market-operations", priority: "primary" },
+  { name: "商务沟通", group: "sales-market-operations", priority: "primary" },
+  { name: "客户开发", group: "sales-market-operations", priority: "primary" },
+  { name: "招投标", group: "sales-market-operations", priority: "secondary" },
+  { name: "内容策划", group: "sales-market-operations", priority: "secondary" },
+  { name: "数据分析", group: "sales-market-operations", priority: "secondary" },
+];
+
+export const skills = skillDefinitions.map(({ name }) => name);

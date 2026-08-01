@@ -1,0 +1,9 @@
+name: 失效链接
+description: 报告无法访问或跳转错误的链接
+body:
+  - type: input
+    attributes: { label: 公司名称 }
+  - type: input
+    attributes: { label: 当前错误链接 }
+  - type: textarea
+    attributes: { label: 问题说明和参考来源 }

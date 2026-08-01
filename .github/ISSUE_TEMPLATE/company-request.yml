@@ -1,0 +1,9 @@
+name: 新增公司建议
+description: 建议收录一家北京相关公司
+body:
+  - type: input
+    attributes: { label: 公司名称 }
+  - type: input
+    attributes: { label: 官方网站或公开来源 }
+  - type: textarea
+    attributes: { label: 与北京和具身智能的关联说明 }

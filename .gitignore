@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+.env
+.env.*
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+playwright-report
+test-results
+reports
+graphify-out
+# 外部工具动态生成的 Chromium 用户数据目录（文件会被进程锁定，不应提交）
+.chrome-*
+.edge-*
