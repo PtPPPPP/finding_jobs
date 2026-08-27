@@ -2,6 +2,8 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  // 部署在博客的 /finding-jobs/ 子路径下（随 PtP 静态导出同步到 out/finding-jobs）。
+  base: "/finding-jobs/",
   plugins: [react()],
   server: {
     watch: {

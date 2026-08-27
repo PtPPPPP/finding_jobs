@@ -68,8 +68,20 @@ const readQueryState = () => {
   return parseFilterQuery(window.location.search, queryOptions);
 };
 
+const routeBasePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// 站点部署在 /finding-jobs/ 子路径下：先把 base 前缀归一化，再做页面判断，
+// 这样根路径部署（/）与子路径部署的行为保持一致。
+const resolveRoutePath = () => {
+  const pathname = window.location.pathname.replace(/\/$/, "") || "/";
+  if (routeBasePath && pathname.startsWith(routeBasePath)) {
+    return pathname.slice(routeBasePath.length) || "/";
+  }
+  return pathname;
+};
+
 function App() {
-  const path = window.location.pathname;
+  const path = resolveRoutePath();
   if (path === "/privacy") return <LegalPage page="privacy" />;
   if (path === "/terms") return <LegalPage page="terms" />;
   if (path !== "/") return <NotFoundPage />;

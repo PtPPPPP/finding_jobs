@@ -22,7 +22,7 @@ export function FooterDisclaimer({ companies }: { companies: Company[] }) {
         </ul>
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-400">
           <span>{SITE_VERSION}</span><span>数据最近核验：{stats.latestVerifiedAt}</span><span>公司：{stats.companyCount}</span><span>直接投递入口：{stats.companiesWithApplicationEntries}</span>
-          <a href="/privacy" className="text-cyan-200">隐私政策</a><a href="/terms" className="text-cyan-200">服务条款</a>
+          <a href={`${import.meta.env.BASE_URL}privacy`} className="text-cyan-200">隐私政策</a><a href={`${import.meta.env.BASE_URL}terms`} className="text-cyan-200">服务条款</a>
           <button type="button" onClick={copyFeedback} className="text-cyan-200">复制反馈模板</button>
         </div>
       </div>
