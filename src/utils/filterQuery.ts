@@ -11,6 +11,7 @@ import type {
 export const defaultCompanyFilters: CompanyFilters = {
   keyword: "",
   tier: "全部",
+  city: "全部",
   category: "",
   role: "",
   skill: "",
@@ -64,6 +65,7 @@ const sortKeys: CompanySortKey[] = [
 const tiers: Array<CompanyTier | "全部"> = ["全部", "S", "A", "B", "C"];
 
 interface FilterQueryOptions {
+  cities: readonly string[];
   categories: readonly string[];
   roles: readonly string[];
   skills: readonly string[];
@@ -76,6 +78,7 @@ interface FilterQueryOptions {
 export function parseFilterQuery(search: string, options: FilterQueryOptions) {
   const params = new URLSearchParams(search);
   const tier = params.get("tier") ?? defaultCompanyFilters.tier;
+  const city = params.get("city") ?? defaultCompanyFilters.city;
   const category = params.get("category") ?? defaultCompanyFilters.category;
   const role = params.get("role") ?? defaultCompanyFilters.role;
   const skill = params.get("skill") ?? defaultCompanyFilters.skill;
@@ -118,6 +121,7 @@ export function parseFilterQuery(search: string, options: FilterQueryOptions) {
       tier: tiers.includes(tier as CompanyTier | "全部")
         ? (tier as CompanyTier | "全部")
         : defaultCompanyFilters.tier,
+      city: options.cities.includes(city) ? city : defaultCompanyFilters.city,
       category: options.categories.includes(category)
         ? category
         : defaultCompanyFilters.category,
@@ -157,6 +161,9 @@ export function serializeFilterQuery(
   }
   if (filters.tier !== defaultCompanyFilters.tier) {
     params.set("tier", filters.tier);
+  }
+  if (filters.city !== defaultCompanyFilters.city) {
+    params.set("city", filters.city);
   }
   if (filters.category) {
     params.set("category", filters.category);

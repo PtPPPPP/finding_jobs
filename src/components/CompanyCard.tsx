@@ -86,7 +86,11 @@ export function CompanyCard({ company, expanded, onToggle }: CompanyCardProps) {
         </div>
         <div>
           <p className="text-xs text-slate-500">北京相关性</p>
-          <p>{company.beijingRelevance}</p>
+          <p>
+            {company.cities
+              .map(({ city, presence }) => (presence === "待核验" ? `${city}（待核验）` : `${city} · ${presence}`))
+              .join("，")}
+          </p>
         </div>
         <div>
           <p className="text-xs text-slate-500">更新时间</p>

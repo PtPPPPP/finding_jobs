@@ -430,7 +430,12 @@ describe("company verification & application entry integrity", () => {
         offenders.push(`${company.id}: companyRoleFits`);
       }
       if (company.recommendedSkills.length === 0) offenders.push(`${company.id}: recommendedSkills`);
-      if (isBlank(company.beijingRelevance)) offenders.push(`${company.id}: beijingRelevance`);
+      if (
+        company.cities.length === 0 ||
+        company.cities.some(({ city }) => isBlank(city))
+      ) {
+        offenders.push(`${company.id}: cities`);
+      }
       return offenders;
     });
 

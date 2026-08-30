@@ -4,6 +4,7 @@ import type { CompanyFilters, CompanySortKey, CompanyTier } from "../types";
 interface FilterBarProps {
   filters: CompanyFilters;
   sortKey: CompanySortKey;
+  cities: string[];
   categories: string[];
   roles: string[];
   skills: string[];
@@ -21,6 +22,7 @@ const tiers: Array<CompanyTier | "全部"> = ["全部", "S", "A", "B", "C"];
 export function FilterBar({
   filters,
   sortKey,
+  cities,
   categories,
   roles,
   skills,
@@ -30,8 +32,30 @@ export function FilterBar({
   onReset,
 }: FilterBarProps) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [shareState, setShareState] = useState<"idle" | "copied" | "failed">("idle");
+
+  const shareCurrentView = () => {
+    // 筛选条件实时同步在 URL 里，直接分享当前链接即可复现同一视图
+    if (!navigator.clipboard) {
+      setShareState("failed");
+      window.setTimeout(() => setShareState("idle"), 2000);
+      return;
+    }
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => {
+        setShareState("copied");
+        window.setTimeout(() => setShareState("idle"), 2000);
+      })
+      .catch(() => {
+        setShareState("failed");
+        window.setTimeout(() => setShareState("idle"), 2000);
+      });
+  };
+
   const activeFilterCount = [
     filters.tier !== "全部",
+    filters.city !== "全部",
     Boolean(filters.category),
     Boolean(filters.role),
     Boolean(filters.skill),
@@ -40,6 +64,7 @@ export function FilterBar({
   const filterSummary = [
     filters.keyword.trim(),
     filters.tier !== "全部" ? filters.tier : "",
+    filters.city !== "全部" ? filters.city : "",
     filters.category,
     filters.role,
     filters.skill,
@@ -58,17 +83,27 @@ export function FilterBar({
           <h2 className="text-xl font-semibold text-white">公司雷达</h2>
           <p className="mt-1 text-sm text-slate-400">当前命中 {resultCount} 家公司</p>
         </div>
-        <button
-          type="button"
-          aria-label="重置所有筛选条件"
-          onClick={() => {
-            setMobileFiltersOpen(false);
-            onReset();
-          }}
-          className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300 hover:text-cyan-100"
-        >
-          重置筛选
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={shareCurrentView}
+            aria-label="复制当前筛选视图的链接"
+            className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300 hover:text-cyan-100"
+          >
+            {shareState === "copied" ? "已复制链接" : shareState === "failed" ? "复制失败" : "分享当前筛选"}
+          </button>
+          <button
+            type="button"
+            aria-label="重置所有筛选条件"
+            onClick={() => {
+              setMobileFiltersOpen(false);
+              onReset();
+            }}
+            className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300 hover:text-cyan-100"
+          >
+            重置筛选
+          </button>
+        </div>
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
@@ -82,6 +117,22 @@ export function FilterBar({
           onChange={(event) => update("keyword", event.target.value)}
           placeholder="搜索公司、方向、技能"
         />
+        <label className="sr-only" htmlFor="company-city">
+          城市
+        </label>
+        <select
+          id="company-city"
+          className="field"
+          value={filters.city}
+          onChange={(event) => update("city", event.target.value)}
+          aria-label="按城市筛选公司"
+        >
+          {["全部", ...cities].map((city) => (
+            <option key={city} value={city}>
+              {city === "全部" ? "全部城市" : city}
+            </option>
+          ))}
+        </select>
         <button
           type="button"
           aria-expanded={mobileFiltersOpen}

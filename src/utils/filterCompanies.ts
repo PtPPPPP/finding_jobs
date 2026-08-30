@@ -10,7 +10,7 @@ const getCompanySearchText = (company: Company) =>
   [
     company.name,
     company.englishName,
-    company.beijingRelevance,
+    ...company.cities.map(({ city, presence }) => `${city}${presence === "待核验" ? "" : presence}`),
     company.verificationStatus,
     ...company.category,
     ...company.focus,
@@ -36,6 +36,9 @@ export function filterCompanies(companies: Company[], filters: Partial<CompanyFi
 
     const matchesTier =
       !filters.tier || filters.tier === "全部" || company.tier === filters.tier;
+    const matchesCity =
+      !filters.city || filters.city === "全部" ||
+      company.cities.some(({ city }) => city === filters.city);
     const matchesCategory =
       !filters.category || company.category.includes(filters.category);
     const matchesRole =
@@ -49,6 +52,7 @@ export function filterCompanies(companies: Company[], filters: Partial<CompanyFi
     return (
       matchesKeyword &&
       matchesTier &&
+      matchesCity &&
       matchesCategory &&
       matchesRole &&
       matchesSkill

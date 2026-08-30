@@ -8,6 +8,7 @@ import {
 } from "./filterQuery";
 
 const options = {
+  cities: ["北京", "杭州", "上海"],
   categories: ["人形机器人", "机器人视觉"],
   roles: ["机器人算法实习生", "视觉算法实习生"],
   skills: ["ROS2", "Python"],
@@ -19,7 +20,7 @@ const options = {
 describe("filter query state", () => {
   it("parses legal query values into filter state", () => {
     const state = parseFilterQuery(
-      "?keyword=机器人&skill=ROS2&tier=A&category=人形机器人&role=机器人算法实习生&sort=undergraduateFriendlyScore",
+      "?keyword=机器人&skill=ROS2&tier=A&city=杭州&category=人形机器人&role=机器人算法实习生&sort=undergraduateFriendlyScore",
       options,
     );
 
@@ -27,6 +28,7 @@ describe("filter query state", () => {
       filters: {
         keyword: "机器人",
         tier: "A",
+        city: "杭州",
         category: "人形机器人",
         role: "机器人算法实习生",
         skill: "ROS2",
@@ -39,7 +41,7 @@ describe("filter query state", () => {
 
   it("falls back to defaults for illegal query values", () => {
     const state = parseFilterQuery(
-      "?skill=不存在&tier=Z&category=不存在&role=不存在&sort=bad",
+      "?skill=不存在&tier=Z&city=火星&category=不存在&role=不存在&sort=bad",
       options,
     );
 

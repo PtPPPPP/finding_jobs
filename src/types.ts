@@ -2,6 +2,19 @@ export type CompanyTier = "S" | "A" | "B" | "C";
 
 export type VerificationStatus = "已公开核验" | "部分核验" | "待核验";
 
+/** 公司在该城市的布局类型：总部 / 研发中心 / 主要岗位 / 创新平台 / 待核验 */
+export type CompanyCityPresence =
+  | "总部"
+  | "研发中心"
+  | "主要岗位"
+  | "创新平台"
+  | "待核验";
+
+export interface CompanyCity {
+  city: string;
+  presence: CompanyCityPresence;
+}
+
 export type ApplicationEntryType =
   | "career"
   | "campus"
@@ -22,12 +35,8 @@ export interface Company {
   englishName?: string;
   tier: CompanyTier;
   category: string[];
-  beijingRelevance:
-    | "北京总部"
-    | "北京研发中心"
-    | "北京岗位"
-    | "北京创新平台"
-    | "待核验";
+  /** 公司有办公/研发/招聘布局的城市（人工维护），至少一项 */
+  cities: CompanyCity[];
   focus: string[];
   recommendedSkills: string[];
   roleDirections?: CompanyRoleDirection[];
@@ -150,6 +159,7 @@ export interface JobRoleFilters {
 export interface CompanyFilters {
   keyword: string;
   tier: CompanyTier | "全部";
+  city: string;
   category: string;
   role: string;
   skill: string;

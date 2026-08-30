@@ -64,8 +64,9 @@ describe("decision UI components", () => {
     const user = userEvent.setup();
     render(
       <FilterBar
-        filters={{ keyword: "", tier: "A", category: "", role: "", skill: "ROS2" }}
+        filters={{ keyword: "", tier: "A", city: "全部", category: "", role: "", skill: "ROS2" }}
         sortKey="fitScore"
+        cities={[]}
         categories={[]}
         roles={[]}
         skills={["ROS2"]}

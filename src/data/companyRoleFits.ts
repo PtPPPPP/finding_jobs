@@ -8,18 +8,18 @@ interface RoleFitSeed {
 
 const seeds: Record<string, RoleFitSeed> = {
   "robot-algorithm-intern": {
-    core: ["galbot", "galaxea-ai"],
+    core: ["galbot", "galaxea-ai",  "unitree", "agibot"],
     adjacent: ["robotera", "tiangong-center"],
     possible: ["baai"],
   },
   "control-algorithm": {
-    core: ["robotera", "noetix"],
-    adjacent: ["booster", "rokae"],
+    core: ["robotera", "noetix",  "fourier", "flexiv", "inovance", "estun"],
+    adjacent: ["booster", "rokae",  "brainco"],
     possible: ["aubo"],
   },
   "rl-locomotion": {
-    core: ["galaxea-ai", "robotera"],
-    adjacent: ["tiangong-center"],
+    core: ["galaxea-ai", "robotera",  "unitree"],
+    adjacent: ["tiangong-center",  "deeprobotics"],
     possible: ["xiaomi-robotics"],
   },
   "ros2-dev": {
@@ -34,31 +34,31 @@ const seeds: Record<string, RoleFitSeed> = {
   },
   "robot-test": {
     core: ["robotera", "booster", "yunji"],
-    adjacent: ["jd-robotics"],
+    adjacent: ["jd-robotics",  "leju", "estun"],
     possible: ["aubo"],
   },
   "robot-application": {
-    core: ["mech-mind", "aubo", "orionstar"],
-    adjacent: ["yunji", "jd-robotics", "robotera", "booster"],
+    core: ["mech-mind", "aubo", "orionstar",  "flexiv", "jaka", "dobot", "ubtech", "leju"],
+    adjacent: ["yunji", "jd-robotics", "robotera", "booster",  "pudu"],
     possible: ["casbot", "linker-hand", "riguan-robotics", "jiyi-embodied"],
   },
   "vision-algorithm": {
     core: ["mech-mind", "gigaai"],
     adjacent: ["xiaomi-robotics"],
-    possible: ["horizon"],
+    possible: ["horizon",  "brainco"],
   },
   "slam-navigation": {
-    core: ["orionstar", "yunji"],
+    core: ["orionstar", "yunji",  "deeprobotics", "pudu"],
     adjacent: ["meituan-robotics"],
     possible: ["jd-robotics"],
   },
   "dexterous-hand": {
     core: ["linker-hand", "mech-mind"],
-    adjacent: ["rokae", "aubo"],
+    adjacent: ["rokae", "aubo",  "agibot"],
     possible: ["galbot"],
   },
   "embodied-data-loop": {
-    core: ["galaxea-ai", "bytedance-seed"],
+    core: ["galaxea-ai", "bytedance-seed",  "agibot"],
     adjacent: ["worldstream"],
     possible: ["jiyi-embodied"],
   },
@@ -74,12 +74,12 @@ const seeds: Record<string, RoleFitSeed> = {
   },
   "robot-product-manager": {
     core: ["galbot", "orionstar", "meituan-robotics"],
-    adjacent: ["robotera", "baidu-cloud-robotics", "honor-robotics"],
+    adjacent: ["robotera", "baidu-cloud-robotics", "honor-robotics", "fourier", "brainco", "agibot"],
     possible: ["horizon", "xiaomi-robotics"],
   },
   "solution-engineer": {
     core: ["mech-mind", "aubo", "orionstar"],
-    adjacent: ["yunji", "jd-robotics", "baidu-cloud-robotics"],
+    adjacent: ["yunji", "jd-robotics", "baidu-cloud-robotics",  "flexiv", "estun"],
     possible: ["hirain", "yongxing-beijing", "casbot"],
   },
   "pre-sales-engineer": {
@@ -89,17 +89,17 @@ const seeds: Record<string, RoleFitSeed> = {
   },
   "technical-support": {
     core: ["noetix", "booster", "linker-hand"],
-    adjacent: ["mech-mind", "aubo", "orionstar", "yunji"],
+    adjacent: ["mech-mind", "aubo", "orionstar", "yunji",  "dobot", "ubtech"],
     possible: ["horizon", "hirain", "newtonic-beijing", "yongxing-beijing"],
   },
   "field-service": {
-    core: ["rokae", "aubo", "orionstar"],
-    adjacent: ["yunji", "jd-robotics", "mech-mind"],
+    core: ["rokae", "aubo", "orionstar",  "deeprobotics", "jaka"],
+    adjacent: ["yunji", "jd-robotics", "mech-mind",  "unitree", "fourier", "pudu"],
     possible: ["riguan-robotics", "hirain"],
   },
   "customer-success": {
     core: ["baidu-cloud-robotics", "orionstar"],
-    adjacent: ["bytedance-seed", "worldstream", "yunji"],
+    adjacent: ["bytedance-seed", "worldstream", "yunji",  "pudu"],
     possible: ["jd-robotics", "gigaai"],
   },
   "project-implementation": {
@@ -109,7 +109,7 @@ const seeds: Record<string, RoleFitSeed> = {
   },
   "project-delivery": {
     core: ["robotera", "mech-mind", "orionstar"],
-    adjacent: ["aubo", "yunji", "jd-robotics"],
+    adjacent: ["aubo", "yunji", "jd-robotics",  "deeprobotics", "estun"],
     possible: ["baidu-cloud-robotics", "hirain", "yongxing-beijing"],
   },
   "technical-project-manager": {
@@ -119,32 +119,32 @@ const seeds: Record<string, RoleFitSeed> = {
   },
   "system-validation": {
     core: ["galbot", "galaxea-ai", "robotera"],
-    adjacent: ["noetix", "booster", "tiangong-center", "linker-hand", "mech-mind"],
+    adjacent: ["noetix", "booster", "tiangong-center", "linker-hand", "mech-mind",  "ubtech"],
     possible: ["rokae", "aubo", "horizon", "hirain", "vbot", "newtonic-beijing", "yongxing-beijing"],
   },
   "quality-engineer": {
-    core: ["robotera", "noetix", "booster"],
+    core: ["robotera", "noetix", "booster",  "leaderdrive"],
     adjacent: ["linker-hand", "mech-mind", "rokae", "aubo"],
     possible: ["horizon", "hirain", "vbot", "newtonic-beijing", "yongxing-beijing"],
   },
   "process-npi": {
     core: ["robotera", "noetix", "booster"],
-    adjacent: ["linker-hand", "mech-mind", "rokae", "aubo"],
+    adjacent: ["linker-hand", "mech-mind", "rokae", "aubo",  "leaderdrive", "inovance"],
     possible: ["honor-robotics", "horizon", "hirain", "vbot", "newtonic-beijing", "yongxing-beijing", "wujie-power"],
   },
   "supply-chain-procurement": {
-    core: ["robotera", "noetix", "booster"],
-    adjacent: ["linker-hand", "mech-mind", "rokae", "aubo"],
+    core: ["robotera", "noetix", "booster",  "inovance"],
+    adjacent: ["linker-hand", "mech-mind", "rokae", "aubo",  "leaderdrive"],
     possible: ["honor-robotics", "horizon", "hirain", "vbot", "yongxing-beijing", "wujie-power"],
   },
   "sales-engineer": {
     core: ["mech-mind", "rokae", "aubo"],
-    adjacent: ["orionstar", "yunji", "horizon"],
+    adjacent: ["orionstar", "yunji", "horizon",  "jaka", "estun"],
     possible: ["hirain", "yongxing-beijing", "booster", "casbot"],
   },
   "technical-marketing": {
     core: ["galbot", "mech-mind"],
-    adjacent: ["orionstar", "yunji", "baidu-cloud-robotics", "horizon"],
+    adjacent: ["orionstar", "yunji", "baidu-cloud-robotics", "horizon",  "dobot", "leju"],
     possible: ["honor-robotics", "tiangong-center", "gigaai", "roboscience"],
   },
   "business-development": {

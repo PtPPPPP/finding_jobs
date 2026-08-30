@@ -16,6 +16,7 @@ import { getQuickPickResults } from "./quickPick";
 import { scoreJobRoleForPreferences } from "./quickPick";
 
 const queryOptions = {
+  cities: [],
   categories: [...new Set(companies.flatMap(({ category }) => category))],
   roles: jobRoles.map(({ title }) => title),
   skills,

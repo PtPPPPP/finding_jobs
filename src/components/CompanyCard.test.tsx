@@ -10,7 +10,7 @@ const companyFixture: Company = {
   englishName: "Example Company",
   tier: "A",
   category: ["人形机器人"],
-  beijingRelevance: "北京总部",
+  cities: [{ city: "北京", presence: "总部" }],
   focus: ["机器人控制"],
   roleDirections: [
     { roleId: "robot-algorithm-intern", title: "机器人算法实习生", level: "core", reason: "测试关联" },

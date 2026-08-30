@@ -10,7 +10,7 @@ const sampleCompanies: Company[] = [
     englishName: "Alpha Robotics",
     tier: "S",
     category: ["人形机器人"],
-    beijingRelevance: "北京总部",
+    cities: [{ city: "北京", presence: "总部" }],
     focus: ["运动控制", "VLA"],
     roleDirections: [
       { roleId: "robot-algorithm-intern", title: "机器人算法实习生", level: "core", reason: "测试关联" },
@@ -30,7 +30,7 @@ const sampleCompanies: Company[] = [
     englishName: "Beta Vision",
     tier: "B",
     category: ["机器人视觉"],
-    beijingRelevance: "北京研发中心",
+    cities: [{ city: "北京", presence: "研发中心" }],
     focus: ["机器人视觉", "SLAM"],
     roleDirections: [
       { roleId: "vision-algorithm", title: "视觉算法实习生", level: "core", reason: "测试关联" },

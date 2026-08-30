@@ -40,7 +40,11 @@ const categoryOptions = unique(
   companiesWithRoleDirections.flatMap((company) => company.category),
 );
 const roleOptions = jobRoles.map((role) => role.title);
+const cityOptions = unique(
+  companiesWithRoleDirections.flatMap((company) => company.cities.map(({ city }) => city)),
+);
 const queryOptions = {
+  cities: cityOptions,
   categories: categoryOptions,
   roles: roleOptions,
   skills,
@@ -223,7 +227,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <Hero onCompaniesClick={scrollToCompanies} onRolesClick={scrollToRoles} />
+      <Hero companies={companiesWithRoleDirections} onCompaniesClick={scrollToCompanies} onRolesClick={scrollToRoles} />
       <QuickPick
         roles={jobRoles}
         preferences={quickPickPreferences}
@@ -259,6 +263,7 @@ function HomePage() {
         <FilterBar
           filters={filters}
           sortKey={sortKey}
+          cities={cityOptions}
           categories={categories}
           roles={roles}
           skills={skills}
