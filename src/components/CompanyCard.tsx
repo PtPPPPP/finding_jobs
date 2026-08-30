@@ -49,8 +49,14 @@ export function CompanyCard({ company, expanded, onToggle }: CompanyCardProps) {
   const coreDirections = (company.roleDirections ?? []).filter(({ level }) => level === "core");
   const adjacentDirections = (company.roleDirections ?? []).filter(({ level }) => level === "adjacent");
   const possibleDirections = (company.roleDirections ?? []).filter(({ level }) => level === "possible");
-  const copyFeedback = async () => {
-    await navigator.clipboard?.writeText(createFeedbackTemplate(company));
+  const copyFeedback = () => {
+    if (!navigator.clipboard) {
+      window.alert("当前环境不支持剪贴板复制，请手动复制模板内容。");
+      return;
+    }
+    navigator.clipboard.writeText(createFeedbackTemplate(company)).catch(() => {
+      window.alert("复制失败，请检查浏览器剪贴板权限（需 HTTPS 环境）。");
+    });
   };
 
   return (

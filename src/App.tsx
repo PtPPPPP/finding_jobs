@@ -22,7 +22,6 @@ import type {
 } from "./types";
 import {
   defaultCompanyFilters,
-  defaultDecisionQueryState,
   defaultJobRoleFilters,
   parseFilterQuery,
   serializeFilterQuery,
@@ -55,18 +54,7 @@ const queryOptions = {
 
 type HistoryMode = "push" | "replace";
 
-const readQueryState = () => {
-  if (typeof window === "undefined") {
-    return {
-      filters: defaultCompanyFilters,
-      sortKey: "fitScore" as CompanySortKey,
-      jobRoleFilters: defaultJobRoleFilters,
-      decisionState: defaultDecisionQueryState,
-    };
-  }
-
-  return parseFilterQuery(window.location.search, queryOptions);
-};
+const readQueryState = () => parseFilterQuery(window.location.search, queryOptions);
 
 const routeBasePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -80,30 +68,37 @@ const resolveRoutePath = () => {
   return pathname;
 };
 
+// App 只做路由分发、不调用 Hooks；所有 Hooks 都在 HomePage 中无条件调用，
+// 避免"条件性调用 Hooks"违反 React 规则。
 function App() {
   const path = resolveRoutePath();
   if (path === "/privacy") return <LegalPage page="privacy" />;
   if (path === "/terms") return <LegalPage page="terms" />;
   if (path !== "/") return <NotFoundPage />;
-  const [filters, setFilters] = useState<CompanyFilters>(() => readQueryState().filters);
-  const [sortKey, setSortKey] = useState<CompanySortKey>(() => readQueryState().sortKey);
+  return <HomePage />;
+}
+
+function HomePage() {
+  const [queryState] = useState(readQueryState);
+  const [filters, setFilters] = useState<CompanyFilters>(queryState.filters);
+  const [sortKey, setSortKey] = useState<CompanySortKey>(queryState.sortKey);
   const [jobRoleFilters, setJobRoleFilters] = useState<JobRoleFilters>(
-    () => readQueryState().jobRoleFilters,
+    queryState.jobRoleFilters,
   );
   const [candidateRoleIds, setCandidateRoleIds] = useState<string[]>(
-    () => readQueryState().decisionState.candidateRoleIds,
+    queryState.decisionState.candidateRoleIds,
   );
   const [quickPickPreferences, setQuickPickPreferences] =
     useState<QuickPickPreferences>(
-      () => readQueryState().decisionState.quickPickPreferences,
+      queryState.decisionState.quickPickPreferences,
     );
   const [expandedCompanyId, setExpandedCompanyId] = useState<string | null>(null);
   const companiesRef = useRef<HTMLElement>(null);
   const rolesRef = useRef<HTMLDivElement>(null);
   const historyModeRef = useRef<HistoryMode>("replace");
 
-  const categories = useMemo(() => categoryOptions, []);
-  const roles = useMemo(() => roleOptions, []);
+  const categories = categoryOptions;
+  const roles = roleOptions;
 
   const filteredCompanies = useMemo(
     () =>

@@ -5,7 +5,15 @@ import type { Company } from "../types";
 
 export function FooterDisclaimer({ companies }: { companies: Company[] }) {
   const stats = getSiteStats(companies);
-  const copyFeedback = async () => { await navigator.clipboard?.writeText(createFeedbackTemplate()); };
+  const copyFeedback = () => {
+    if (!navigator.clipboard) {
+      window.alert("当前环境不支持剪贴板复制，请手动复制模板内容。");
+      return;
+    }
+    navigator.clipboard.writeText(createFeedbackTemplate()).catch(() => {
+      window.alert("复制失败，请检查浏览器剪贴板权限（需 HTTPS 环境）。");
+    });
+  };
   return (
     <footer className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 lg:px-8">
       <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5 text-sm leading-7 text-slate-300">
