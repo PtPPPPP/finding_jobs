@@ -1,3 +1,4 @@
+import { renderScoreDots } from "../utils/score";
 import { useMemo, useState } from "react";
 import {
   jobFunctionLabels,
@@ -37,8 +38,6 @@ const scoreLabels = [
   ["项目协调", "coordinationIntensity"],
   ["应届生友好", "entryLevelFit"],
 ] as const;
-
-const renderScore = (score: number) => `${"●".repeat(score)}${"○".repeat(5 - score)}`;
 
 export function JobRoleSection({
   roles,
@@ -286,7 +285,7 @@ function RoleGrid({
               <p className="mt-4 text-sm text-slate-300">
                 应届生友好度：
                 <span className="ml-2 text-cyan-200" aria-label={`${role.entryLevelFit} 级，共 5 级`}>
-                  {renderScore(role.entryLevelFit)}
+                  {renderScoreDots(role.entryLevelFit)}
                 </span>
               </p>
               <div className="mt-4 flex flex-wrap justify-end gap-2">

@@ -41,7 +41,7 @@
 
 ## 快速开始
 
-环境要求：Node.js 18 或更高版本。
+环境要求：Node.js 20.19+ 或 22.12+（Vite 7 要求；`npm run check:links` 需 Node 22.18+ 以支持 TS 类型剥离）。
 
 ```bash
 npm install

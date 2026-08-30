@@ -1,6 +1,7 @@
 import type { Company, CompanyTier } from "../types";
 import { ApplicationLinks } from "./ApplicationLinks";
 import { createFeedbackTemplate } from "../utils/feedback";
+import { renderScoreDots } from "../utils/score";
 import { freshnessLabel, getVerificationFreshness } from "../utils/verificationFreshness";
 
 interface CompanyCardProps {
@@ -15,8 +16,6 @@ const tierClass: Record<CompanyTier, string> = {
   B: "border-blue-300/50 bg-blue-300/15 text-blue-100",
   C: "border-slate-300/40 bg-slate-300/10 text-slate-200",
 };
-
-const renderScore = (score: number) => "●".repeat(score) + "○".repeat(5 - score);
 
 function ExternalLink({
   href,
@@ -74,8 +73,8 @@ export function CompanyCard({ company, expanded, onToggle }: CompanyCardProps) {
           <p className="mt-1 text-sm text-slate-400">{company.englishName || "英文名待核验"}</p>
         </div>
         <div className="text-sm text-slate-300">
-          <div>适配度 <span className="text-cyan-200">{renderScore(company.fitScore)}</span></div>
-          <div>本科友好 <span className="text-violet-200">{renderScore(company.undergraduateFriendlyScore)}</span></div>
+          <div>适配度 <span className="text-cyan-200">{renderScoreDots(company.fitScore)}</span></div>
+          <div>本科友好 <span className="text-violet-200">{renderScoreDots(company.undergraduateFriendlyScore)}</span></div>
         </div>
       </header>
       <p className="mt-2 text-xs text-slate-400">最近核验：{company.lastVerifiedAt ?? "待核验"}</p>
