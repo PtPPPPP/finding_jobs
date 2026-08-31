@@ -4,6 +4,16 @@
 
 它把公司、岗位方向、技能和公开信息整理成一个可搜索、可筛选、可比较的前端网站，帮助用户先判断适合关注哪些方向，再去核对公司的官方信息。公司覆盖已从北京扩展到上海、深圳、杭州、苏州、南京等城市，可通过城市筛选自由切换。
 
+## 在线体验与案例证据
+
+- 在线体验：<https://berl1n.xyz/finding-jobs/>
+- 完整案例复盘：[从不可靠公开信息到可核验岗位决策工具](docs/case-study.md)
+- 自动化验证：[CI](https://github.com/PtPPPPP/finding_jobs/actions/workflows/ci.yml) · [定时链接检查](https://github.com/PtPPPPP/finding_jobs/actions/workflows/link-check.yml)
+
+![Finding Jobs 首页展示公司、岗位方向、官方入口和数据核验状态](docs/images/overview.png)
+
+上图来自 2026-08-31 的线上版本。页面中的公司数量、岗位方向和核验状态会随着公开资料维护而变化；它们不是当前招聘数量，也不代表任何公司正在招聘。
+
 ## 这个站和其他招聘内容的区别
 
 - **诚实的数据标注**：每家公司都有 `verificationStatus`（已公开核验 / 部分核验 / 待核验）和 `lastVerifiedAt`，核验过期会在界面上明示。宁可标注"待核验"，不编造岗位事实——在假岗位满天飞的招聘内容里，这是本站的第一卖点。

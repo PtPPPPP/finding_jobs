@@ -8,6 +8,15 @@ const TIMEOUT_MS = 10000;
 const CONCURRENCY = 6;
 
 const HEAD_BLOCKLIST = new Set([403, 404, 405, 410, 501]);
+const DEFINITIVE_NETWORK_FAILURES = new Set(["ENODATA", "ENOTFOUND"]);
+
+function getNetworkErrorCode(error) {
+  const cause = error instanceof Error ? error.cause : null;
+  if (cause && typeof cause === "object" && "code" in cause && typeof cause.code === "string") {
+    return cause.code;
+  }
+  return null;
+}
 
 /**
  * 收集每家公司中需要校验的链接记录。
@@ -83,11 +92,15 @@ async function checkLink(record) {
     }
   } catch (error) {
     const isTimeout = error instanceof Error && error.name === "TimeoutError";
+    const networkCode = getNetworkErrorCode(error);
     const message = error instanceof Error ? error.message : "Unknown network error";
     return {
       ...record,
-      level: isTimeout ? "WARN" : "FAIL",
-      status: isTimeout ? `timeout (${TIMEOUT_MS}ms)` : `network error: ${message}`,
+      // DNS 明确不存在可视为死链；超时、TLS/WAF 和重定向异常只代表本次无法自动验证。
+      level: networkCode && DEFINITIVE_NETWORK_FAILURES.has(networkCode) ? "FAIL" : "WARN",
+      status: isTimeout
+        ? `timeout (${TIMEOUT_MS}ms)`
+        : `network error${networkCode ? ` (${networkCode})` : ""}: ${message}`,
     };
   } finally {
     // GET 回退时主动放弃正文，避免下载大文件。
