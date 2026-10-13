@@ -160,6 +160,9 @@ describe("App interactions", () => {
   it("caps the candidate list at five", async () => {
     const user = userEvent.setup();
     render(<App />);
+    const roleSection = within(
+      screen.getByRole("heading", { name: "职业方向导航" }).closest("section")!,
+    );
     const roleNames = [
       "机器人控制算法工程师",
       "运动控制/强化学习运控实习生",
@@ -168,10 +171,10 @@ describe("App interactions", () => {
       "机器人测试工程师",
     ];
     for (const name of roleNames) {
-      await user.click(screen.getByRole("button", { name: `加入${name}候选` }));
+      await user.click(roleSection.getByRole("button", { name: `加入${name}候选` }));
     }
-    expect(screen.getByRole("button", { name: "加入FAE / 应用工程师候选" })).toBeDisabled();
-    expect(screen.getAllByRole("button", { name: /移出.*候选/ })).toHaveLength(5);
+    expect(roleSection.getByRole("button", { name: "加入FAE / 应用工程师候选" })).toBeDisabled();
+    expect(roleSection.getAllByRole("button", { name: /移出.*候选/ })).toHaveLength(5);
   });
 
   it("renders legal pages and an unknown path without a blank screen", () => {
